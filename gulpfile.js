@@ -6,7 +6,7 @@ const clean = require('./tasks/clean');
 const resources = require('./tasks/resources');
 const deploy = require('./tasks/deploy');
 const { fonts, fontsStyle } = require('./tasks/fonts');
-const { imgToApp, tinypng } = require('./tasks/images');
+const { imgToApp, minifyImage } = require('./tasks/images');
 const { styles, stylesBuild } = require('./tasks/styles');
 const { htmlInclude, htmlMinify } = require('./tasks/html');
 const { scripts, scriptsBuild } = require('./tasks/scripts');
@@ -45,7 +45,7 @@ exports.default = series(clean, parallel(htmlInclude, scripts, fonts, resources,
 // BUILD
 exports.cache = series(cache, rewrite);
 
-exports.build = series(clean, parallel(htmlInclude, scriptsBuild, fonts, resources, imgToApp, svgSprites), fontsStyle, stylesBuild, htmlMinify, tinypng);
+exports.build = series(clean, parallel(htmlInclude, scriptsBuild, fonts, resources, imgToApp, svgSprites), fontsStyle, stylesBuild, htmlMinify, minifyImage);
 
 // deploy
 exports.deploy = deploy;
