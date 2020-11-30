@@ -16,7 +16,7 @@ const { cache, rewrite } = require('./tasks/revision');
 const watchFiles = () => {
   browserSync.init({
     server: {
-      baseDir: "./app"
+      baseDir: './app',
     },
   });
 
@@ -31,7 +31,7 @@ const watchFiles = () => {
   watch('./src/img/svg/**.svg', svgSprites);
   watch('./src/fonts/**', fonts);
   watch('./src/fonts/**', fontsStyle);
-}
+};
 
 exports.fileinclude = htmlInclude;
 exports.styles = styles;
@@ -40,12 +40,25 @@ exports.watchFiles = watchFiles;
 exports.fonts = fonts;
 exports.fontsStyle = fontsStyle;
 
-exports.default = series(clean, parallel(htmlInclude, scripts, fonts, resources, imgToApp, svgSprites), fontsStyle, styles, watchFiles);
+exports.default = series(
+  clean,
+  parallel(htmlInclude, scripts, fonts, resources, imgToApp, svgSprites),
+  fontsStyle,
+  styles,
+  watchFiles
+);
 
 // BUILD
 exports.cache = series(cache, rewrite);
 
-exports.build = series(clean, parallel(htmlInclude, scriptsBuild, fonts, resources, imgToApp, svgSprites), fontsStyle, stylesBuild, htmlMinify, minifyImage);
+exports.build = series(
+  clean,
+  parallel(htmlInclude, scriptsBuild, fonts, resources, imgToApp, svgSprites),
+  fontsStyle,
+  stylesBuild,
+  htmlMinify,
+  minifyImage
+);
 
 // deploy
 exports.deploy = deploy;
