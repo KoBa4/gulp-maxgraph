@@ -55,9 +55,8 @@ const fontsStyle = done => {
       let cFontName = '';
       // eslint-disable-next-line no-restricted-syntax
       for (const item of items) {
-        let fontname = item.split('.');
-        fontname = fontname[0];
-        let font = fontname.split('-')[0];
+        let [fontname] = item.split('.');
+        let [font] = fontname.split('-');
         let weight = checkWeight(fontname);
 
         if (cFontName !== fontname) {
