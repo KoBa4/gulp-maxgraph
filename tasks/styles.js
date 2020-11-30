@@ -7,43 +7,57 @@ const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
 const browserSync = require('browser-sync').create();
 
-const styles = () => {
-  return src('./src/scss/**/*.scss')
+const styles = () =>
+  src('./src/scss/**/*.scss')
     .pipe(sourcemaps.init())
-    .pipe(sass({
-      outputStyle: 'expanded'
-    }).on("error", notify.onError()))
-    .pipe(rename({
-      suffix: '.min'
-    }))
-    .pipe(autoprefixer({
-      cascade: false,
-    }))
-    .pipe(cleanCSS({
-      level: 2
-    }))
+    .pipe(
+      sass({
+        outputStyle: 'expanded',
+      }).on('error', notify.onError())
+    )
+    .pipe(
+      rename({
+        suffix: '.min',
+      })
+    )
+    .pipe(
+      autoprefixer({
+        cascade: false,
+      })
+    )
+    .pipe(
+      cleanCSS({
+        level: 2,
+      })
+    )
     .pipe(sourcemaps.write('.'))
     .pipe(dest('./app/css/'))
     .pipe(browserSync.stream());
-}
 
-const stylesBuild = () => {
-  return src('./src/scss/**/*.scss')
-    .pipe(sass({
-      outputStyle: 'expanded'
-    }).on("error", notify.onError()))
-    .pipe(rename({
-      suffix: '.min'
-    }))
-    .pipe(autoprefixer({
-      grid: 'autoplace',
-      cascade: false,
-    }))
-    .pipe(cleanCSS({
-      level: 2
-    }))
-    .pipe(dest('./app/css/'))
-}
+const stylesBuild = () =>
+  src('./src/scss/**/*.scss')
+    .pipe(
+      sass({
+        outputStyle: 'expanded',
+      }).on('error', notify.onError())
+    )
+    .pipe(
+      rename({
+        suffix: '.min',
+      })
+    )
+    .pipe(
+      autoprefixer({
+        grid: 'autoplace',
+        cascade: false,
+      })
+    )
+    .pipe(
+      cleanCSS({
+        level: 2,
+      })
+    )
+    .pipe(dest('./app/css/'));
 
 module.exports = {
   styles,
