@@ -49,7 +49,7 @@ exports.default = series(
 );
 
 // BUILD
-exports.cache = series(cache, rewrite);
+// exports.cache = series(cache, rewrite);
 
 exports.build = series(
   clean,
@@ -57,7 +57,9 @@ exports.build = series(
   fontsStyle,
   stylesBuild,
   htmlMinify,
-  minifyImage
+  minifyImage,
+  cache,
+  rewrite
 );
 
 // deploy
