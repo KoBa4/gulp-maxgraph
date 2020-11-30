@@ -36,6 +36,7 @@ const stylesBuild = () => {
       suffix: '.min'
     }))
     .pipe(autoprefixer({
+      grid: 'autoplace',
       cascade: false,
     }))
     .pipe(cleanCSS({
